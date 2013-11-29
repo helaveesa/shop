@@ -10,6 +10,9 @@ function db_connect()
 	// создаем сам запрос к БД
 	$connection = mysql_connect($host, $user, $pswd);
 	
+	// установка кодировки
+	mysql_query("SET NAMES utf8");
+	
 	/* проверка, если у нас соединение прошло неудачно или неудачно выбралась БД (либо, либо)
 	то функция вернет ложь; иначе вернуть функции соединение  в случае правды */
 	if(!$connection || !mysql_select_db($db, $connection)) 
@@ -76,5 +79,60 @@ function get_products()
 	// теперь можно обращаться к любому продукты из нашей БД
 	
 	
+}
+/* вывод категорий в меню + ссылки для каждого товара +при нажатии на товар будет окрываться файл с его описанием */
+// функция вывода категорий у нас их две в БД (таблица категорий)
+
+function get_cat()
+{
+	
+	// подключение к БД установить соединение с базой
+	db_connect();
+	
+	// запрос к БД	
+	$query = "SELECT * FROM categories ORDER BY id DESC";
+	
+	$result = mysql_query($query); //создание переменной и создание запроса к БД
+		
+	
+	$result = db_result_to_array($result);
+	
+	return $result;
+}
+	
+	// теперь можно обращаться к категории из БД
+	
+	// напишем функцию, которая будет выводит информацию об одном продукте, на который будут кликать (ссылка)
+	
+	function get_product($id)
+	{
+		db_connect();
+		
+		$query = "SELECT * FROM products WHERE id = 'id'"; // запрос к БД с условием, где id='id' (WHERE id = 'id')
+		
+		$result = mysql_query($query);
+		
+		// так как нам будет нужна только информация об одной записи из таблицы products, то $result = db_result_to_array($result); нам не нужно
+		// поэтому поместим нашу нужную нам запись в простую переменную
+		
+		$row = mysql_fetch_array($result); // поместили в переменную $row - все записи о конкретном товаре
+		
+		return $row;		
+	}
+	
+	
+	function get_cat_products($cat)
+{
+	
+	
+	db_connect();
+	
+	$query = "SELECT * FROM products WHERE cat='$cat' ORDER BY id DESC";
+	
+	$result = mysql_query($query); 
+	
+	$result = db_result_to_array($result);
+	
+	return $result;
 }
 ?>

@@ -14,6 +14,16 @@
         <div id="header"></div>
         <div id="menu">
             <div><a href="index.php">Главная</a></div>
+            
+            <?php
+			$categories = get_cat();
+			foreach($categories as $item): 
+			?>
+<!-- формируем ссылку на категории PC и ноутбук; PC - http://test1.ru/shop/index.php?view=cat$id=pc *** notebook - http://test1.ru/shop/index.php?view=cat$id=notebook -->
+            <div><a href="index.php?view=cat$id=<?php echo $item['cat_id'];?>"><?php echo $item['name'];?></a></div>
+            
+            <?php 
+			endforeach;?>
             <div id="cart"><a href="#">Ваша корзина</a> - $</div>
         </div>
     </td>
@@ -26,7 +36,7 @@ include($_SERVER['DOCUMENT_ROOT']. '/shop/views/pages/'.$view.'.php');
 /* подставляя в переменную $view значения и вызывая в адресной строке так: http://test1.ru/shop/index.php?view=cart , где =cart - значение страницы (корзина - cart) можно создать огромное кол-во страниц и подключить таким образом их, меняя центр сайта таким образом */
 
 ?>
-    <table align="center" cellpadding="0" cellspacing="0" class="product" border="0">
+    <!-- <table align="center" cellpadding="0" cellspacing="0" class="product" border="0">
             <tr>
                 <td valign="top">
                     <div><a href="#"><img src="userfiles/1.png" alt="" /></a></div>
@@ -36,7 +46,7 @@ include($_SERVER['DOCUMENT_ROOT']. '/shop/views/pages/'.$view.'.php');
                     </div>
                 </td>
             </tr>
-    </table>
+    </table> -->
     
         
         <div style="clear: both;"></div>

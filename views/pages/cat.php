@@ -1,7 +1,7 @@
-<?php
-// вывод всех товаров из БД
-// создание переменной products и вызов функции get_products(); из файла db_functions.php
-$products = get_products(); // теперь тут все товары
+﻿<?php
+$cat = $_GET['id'];
+
+$products = get_cat_products($cat); 
 
 // проход по всему массиву products
 foreach($products as $item): 
