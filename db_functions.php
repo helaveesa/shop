@@ -108,7 +108,7 @@ function get_cat()
 	{
 		db_connect();
 		
-		$query = "SELECT * FROM products WHERE id = 'id'"; // запрос к БД с условием, где id='id' (WHERE id = 'id')
+		$query = "SELECT * FROM products WHERE id = '$id'"; // запрос к БД с условием, где id='$id' (WHERE id = '$id')
 		
 		$result = mysql_query($query);
 		
